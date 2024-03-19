@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submitted Data</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&#038;display=swap"
-      rel="stylesheet"
-    />
-
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Cairo:wght@200..1000&family=Rampart+One&family=Work+Sans:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,900;1,300;1,900&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-100 pl-2">
     <div class="text-4xl text-center font-extrabold text-black border-b-2 border-black p-4 bg-gray-300">
-        <h> نظام ادارة العيادة</h>
+        <h>نظام ادارة العيادة</h>
     </div>
-    <div class="grid grid-cols-7 h-screen ">
-        <div class="border-r-2  h-full  bg-gray-300  border-b-2 border-black text-right">
-            <h class=" font-bold  p-3   ">لوحة التحكم</h>
+    <div class="grid grid-cols-7 h-screen">
+        <div class="border-r-2 border-black h-full border-b-2 text-right bg-gray-300">
+            <h class="font-bold p-3">لوحة التحكم</h>
             <ul class="">
-                <li class=" p-3 hover:bg-gray-700  hover:text-white hover:font-semibold border-b-2 border-black font-semibold ">
+                <li class="p-3 hover:bg-gray-700 hover:text-white hover:font-semibold border-b-2 border-black font-semibold">
+                    <a href="signin.html">تسجيل الدخول</a>
+                    <i class='bx bx-user-plus' ></i>                </li>
+                <li class="p-3 hover:bg-gray-700 hover:text-white hover:font-semibold border-b-2 border-black font-semibold">
                     <a href="form.html">حجز</a>
-                    <i class='bx bx-home bx-flip-vertical bx-tada'></i>
-                </li>
-                <li class="p-3 hover:bg-gray-700  hover:text-white hover:font-semibold border-b-2 border-black font-semibold ">
+                    <i class='bx bx-home' ></i>                </li>
+                <li class="p-3 hover:bg-gray-700 hover:text-white hover:font-semibold border-b-2 border-black font-semibold">
                     <a href="submit.html">البيانات</a>
-                    <i class='bx bx-data bx-tada bx-rotate-90'></i>
-                </li> 
+                    <i class='bx bx-data' ></i>                </li>
             </ul>
         </div>
-         <div class="w-full col-span-6">
+        <div class="w-full col-span-6">
             <div class="container mx-auto mt-10">
+                <div class="flex justify-start items-center mb-4">
+                    <div class="flex">
+                        <input type="text" id="searchInput" onkeyup="filterData()" placeholder="ابحث عن المريض..." class="border rounded-lg px-4 py-2 mr-2">
+                        <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg">
+                            <i class='bx bx-search'></i>
+                        </button>
+                    </div>
+                    
+                </div>
+                
                 <h1 class="text-2xl font-bold mb-4 pl-4 pb-5">بيانات جميع المرضى</h1>
                 <div class="overflow-x-auto">
                     <table class="table-auto border-collapse border border-black w-full pl-4">
@@ -51,6 +57,7 @@
                             </tr>
                         </thead>
                         <tbody id="dataList">
+                            <!-- بيانات المرضى -->
                         </tbody>
                     </table>
                 </div>
@@ -71,23 +78,40 @@
             <button onclick="closeEditModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">الغاء</button>
         </div>
     </div>
-
+    <footer class="bg-gray-300 text-black py-2 px-3 border-t-2 border-black">
+        <div class="container mx-auto text-center">
+            <p>جميع الحقوق محفوظة &copy; 2024</p>
+        </div>
+    </footer>
     <script>
         var dataList = JSON.parse(localStorage.getItem("dataList")) || [];
         var dataListContainer = document.getElementById("dataList");
 
-        dataList.forEach(function(data, index) {
-            var row = dataListContainer.insertRow();
-            row.innerHTML = `
-                <td class="border border-black px-4 py-2">${index + 1}</td>
-                <td class="border border-black px-4 py-2">${data.name}</td>
-                <td class="border border-black px-4 py-2">${data.national_id}</td>
-                <td class="border border-black px-4 py-2">${data.phone_number}</td>
-                <td class="border border-black px-4 py-2">${data.registration_date}</td>
-                <td class="border border-black px-4 py-2"><button onclick="editData(${index})" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">تعديل</button></td>
-                <td class="border border-black px-4 py-2"><button onclick="deleteData(${index})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">حذف</button></td>
-            `;
-        });
+        function displayData(dataList) {
+            dataListContainer.innerHTML = ""; // Clear previous data
+            dataList.forEach(function(data, index) {
+                var row = dataListContainer.insertRow();
+                row.innerHTML = `
+                    <td class="border border-black px-4 py-2">${index + 1}</td>
+                    <td class="border border-black px-4 py-2">${data.name}</td>
+                    <td class="border border-black px-4 py-2">${data.national_id}</td>
+                    <td class="border border-black px-4 py-2">${data.phone_number}</td>
+                    <td class="border border-black px-4 py-2">${data.registration_date}</td>
+                    <td class="border border-black px-4 py-2"><button onclick="editData(${index})" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded">تعديل</button></td>
+                    <td class="border border-black px-4 py-2"><button onclick="deleteData(${index})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">حذف</button></td>
+                `;
+            });
+        }
+
+        displayData(dataList); // Initial display of all data
+
+        function filterData() {
+            var searchInput = document.getElementById("searchInput").value.toLowerCase();
+            var filteredDataList = dataList.filter(function(data) {
+                return data.name.toLowerCase().includes(searchInput);
+            });
+            displayData(filteredDataList);
+        }
 
         function deleteData(index) {
             dataList.splice(index, 1);
