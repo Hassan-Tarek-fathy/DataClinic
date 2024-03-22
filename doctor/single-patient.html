@@ -1,24 +1,136 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="ar" dir="rtl">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>نظام صحي</title>
+    <title>صفحة الطبيب</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<div class="text-2xl text-center  text-white  p-4 bg-gray-800">
+    <h> نظام ادارة العيادة</h>
+</div>
+<div class="flex min-h-screen">
+    <div class="md:w-64 w-full bg-gray-800 text-white hidden md:block">
+        <div class="flex py-4 px-6">
+            <span class="text-xl font-bold">لوحة التحكم</span>
+        </div>
+        <ul class="mt-6">
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="/doctor/dashboard.html">بيانات المرضى </a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="/doctor/single-patient.html">الكشوفات</a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="profile.html">الملف الشخصي </a>
+            </li>
+        </ul>
+    </div>
+    <div class="flex-grow px-4 py-4">
+      <button
+              type="button"
+              class="md:hidden block text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 p-2 rounded-md"
+      >
+          <svg
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+          >
+              <path
+                      d="M4 6H20M4 12H20M4 18H11V14H4Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              ></path>
+          </svg>
+      </button>
+      <header class="bg-green-500 border-b border-gray-200">
+          <div class="container mx-auto px-4">
+              <div class="flex justify-between items-center py-4">
+                  <h1 class="text-xl font-semibold">سجل المريض</h1>
+                  <a href="#" class="text-blue-500">تسجيل الخروج</a>
+              </div>
+          </div>
+      </header>
+        <div class="flex-1 p-10">
+          <div class="flex justify-between mb-4">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">المريض السابق</button>
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">المريض القادم</button>
+          </div>
+          <div class="flex justify-center mb-4">
+              <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">تحويل الكود الشخصي</button>
+          </div>
+          <div class="flex-1 ">
+            <div class="pl-4"></div>
+            <div class="mb-4 flex justify-between m-4">
+                <label for="patient-number" class="block text-gray-700">كود المريض :</label>
+                <span id="patient-number-value" class="text-gray-700 "></span>
+            </div>
+            <div class="mb-4 flex justify-between m-4">
+                <label for="name" class="block text-gray-700">الاسم:</label>
+                <span id="name-value" class="text-gray-700"></span>
+            </div>
+            <div class="mb-4 flex justify-between m-4">
+                <label for="age" class="block text-gray-700 ">العمر:</label>
+                <span id="age-value" class="text-gray-700"></span>
+            </div>
+            <div class="mb-4 flex justify-between m-4">
+                <label for="phone" class="block text-gray-700">رقم التليفون:</label>
+                <span id="phone-value" class="text-gray-700"></span>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="diagnosis">
+                  تشخيص المريض
+              </label>
+              <textarea class="shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="diagnosis" placeholder="تشخيص المريض"></textarea>
+          </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="status">
+                حالة المريض
+              </label>
+              <div class="relative">
+                <select class="block appearance-none  bg-white border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="status">
+                  <option>متابع</option>
+                  <option>غير متابع</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                حفظ
+              </button>
+            </div>
+    </div>
+    <script>
+        fetch('/path/to/patient/data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('patient-number-value').textContent = data.patientNumber;
+                document.getElementById('name-value').textContent = data.name;
+                document.getElementById('age-value').textContent = data.age;
+                document.getElementById('phone-value').textContent = data.phone;
+                document.getElementById('diagnosis-value').value = data.diagnosis;
+                document.getElementById('status-value').value = data.status;
+            })
+            .catch(error => console.error('Error:', error));
 
-    <link href="../style.css" rel="stylesheet" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Cairo:wght@200..1000&family=Rampart+One&family=Work+Sans:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,900;1,300;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <h1 class="text-[50px]">صفحة التعريف بالمريض</h1>
-  </body>
-</html>
+        document.getElementById('save-diagnosis').addEventListener('click', () => {
+            const diagnosis = document.getElementById('diagnosis-value').value;
+          
+            console.log('Diagnosis:', diagnosis);
+        });
+
+        document.getElementById('save-status').addEventListener('click', () => {
+            const status = document.getElementById('status-value').value;
+
+            console.log('Status:', status);
+        });
+    </script>
+</body>
