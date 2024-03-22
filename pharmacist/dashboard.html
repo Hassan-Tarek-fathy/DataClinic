@@ -19,6 +19,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body dir="rtl">
+    <div class="text-2xl text-center text-white p-4 bg-gray-800">
+      <h1>نظام إدارة العيادة</h1>
+  </div>
     <div class="flex min-h-screen">
       <div class="md:w-64 w-full bg-gray-800 text-white hidden md:block">
         <div class="flex py-4 px-6">
@@ -37,40 +40,12 @@
           <li class="py-2 px-4 rounded-md hover:bg-gray-700">
             <a href="/pharmacist/add.html">أضافة دواء جديد</a>
           </li>
+          <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+            <a href="/pharmacist/single-medicine.html">طلب من المخزن</a>
+          </li>
         </ul>
       </div>
-      <div class="flex-grow px-4 py-4">
-        <button
-          type="button"
-          class="md:hidden block text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 p-2 rounded-md"
-        >
-          <svg
-            class="h-6 w-6"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 6H20M4 12H20M4 18H11V14H4Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-          </svg>
-        </button>
-        <h2 class="text-2xl font-bold mb-4">نظرة عامة</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-white shadow rounded-md p-4">
-            <h3 class="text-lg font-bold mb-2">إجمالي المستخدمين</h3>
-            <span class="text-xl font-semibold text-gray-700">1,234</span>
-          </div>
-          <div class="bg-white shadow rounded-md p-4">
-            <h3 class="text-lg font-bold mb-2">المبيعات الشهرية</h3>
-            <span class="text-xl font-semibold text-green-500">$10,250</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      
+   
   </body>
 </html>

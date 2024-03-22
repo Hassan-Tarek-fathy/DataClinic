@@ -3,7 +3,214 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>نظام صحي</title>
+
+    <link href="../style.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Cairo:wght@200..1000&family=Rampart+One&family=Work+Sans:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,900;1,300;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body></body>
+  <body dir="rtl">
+    <div class="text-2xl text-center text-white p-4 bg-gray-800">
+      <h1>نظام إدارة العيادة</h1>
+  </div>
+    <div class="flex min-h-screen">
+      <div class="md:w-64 w-full bg-gray-800 text-white hidden md:block">
+        <div class="flex py-4 px-6">
+          <span class="text-xl font-bold">لوحة التحكم</span>
+        </div>
+        <ul class="mt-6">
+          <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+            <a href="/pharmacist/dashboard.html">الرئيسية</a>
+          </li>
+          <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+            <a href="/pharmacist/prescriptions.html">الروشتات الطبية</a>
+          </li>
+          <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+            <a href="/pharmacist/medicine.html">الأدوية</a>
+          </li>
+          <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+            <a href="/pharmacist/add.html">أضافة دواء جديد</a>
+          </li>
+          <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+            <a href="/pharmacist/single-medicine.html">طلب من المخزن</a>
+          </li>
+        </ul>
+      </div>
+      <div class="flex-grow px-4 py-4">
+        <button
+          type="button"
+          class="md:hidden block text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 p-2 rounded-md"
+        >
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6H20M4 12H20M4 18H11V14H4Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+        <header class="bg-green-500 border-b border-gray-200">
+          <div class="container mx-auto px-4">
+              <div class="flex justify-between items-center py-4">
+                  <h1 class="text-xl font-semibold">الادوية</h1>
+                  <a href="#" class="text-black">تسجيل الخروج</a>
+              </div>
+          </div>
+      </header>
+      <main class="container mx-auto px-4 py-8">
+          <div class="mb-8">
+              <h2 class="text-lg font-semibold mb-4">البحث عن دواء</h2>
+              <div class="flex items-center">
+                  <input type="text" id="searchInput" class="border rounded-l-lg py-2 px-4 w-3/4" placeholder="اسم الدواء..." onkeyup="searchPatient()">
+                  <button onclick="searchPatient()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg">بحث</button>
+              </div>
+              <div id="searchResult" class="mt-4"></div>
+          </div>
+          <div>
+            <h2 class="text-lg font-semibold mb-4">الادوية</h2>
+            <div class="border rounded-lg p-4 bg-white">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th class="border px-4 py-2">الدواء</th>
+                            <th class="border px-4 py-2">الكمية المتوفرة</th>
+                            <th class="border px-4 py-2">تعديل الكمية</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientsTableBody">
+                        <tr>
+                            <td class="border px-4 py-2">AB</td>
+                            <td class="border px-4 py-2" id="quantityCell1">10</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="decrementQuantity(this, 1)">-</button>
+                                <span class="px-2" id="quantity1"></span>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="incrementQuantity(this, 1)">+</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">CB</td>
+                            <td class="border px-4 py-2" id="quantityCell2">2</td>
+                            <td class="border px-4 py-2">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="decrementQuantity(this, 2)">-</button>
+                                <span class="px-2" id="quantity2"></span>
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="incrementQuantity(this, 2)">+</button>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td class="border px-4 py-2">kh</td>
+                          <td class="border px-4 py-2" id="quantityCell3">8</td>
+                          <td class="border px-4 py-2">
+                              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="decrementQuantity(this, 3)">-</button>
+                              <span class="px-2" id="quantity3"></span>
+                              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="incrementQuantity(this, 3)">+</button>
+                          </td>
+                      </tr>
+                      <tr>
+                        <td class="border px-4 py-2">yju</td>
+                        <td class="border px-4 py-2" id="quantityCell4">8</td>
+                        <td class="border px-4 py-2">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="decrementQuantity(this, 4)">-</button>
+                            <span class="px-2" id="quantity4"></span>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="incrementQuantity(this, 4)">+</button>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td class="border px-4 py-2">ses</td>
+                      <td class="border px-4 py-2" id="quantityCell5">8</td>
+                      <td class="border px-4 py-2">
+                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="decrementQuantity(this, 5)">-</button>
+                          <span class="px-2" id="quantity5"></span>
+                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="incrementQuantity(this, 5)">+</button>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td class="border px-4 py-2">po</td>
+                    <td class="border px-4 py-2" id="quantityCell6">8</td>
+                    <td class="border px-4 py-2">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="decrementQuantity(this, 6)">-</button>
+                        <span class="px-2" id="quantity6"></span>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" onclick="incrementQuantity(this, 6)">+</button>
+                    </td>
+                </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <script>
+
+            function incrementQuantity(button, rowIndex) {
+                let quantityCell = document.getElementById(`quantityCell${rowIndex}`);
+                let quantity = parseInt(quantityCell.textContent);
+                quantityCell.textContent = quantity + 1;
+                saveQuantity(quantityCell);
+                checkQuantityWarning(quantityCell);
+            }
+        
+            function decrementQuantity(button, rowIndex) {
+                let quantityCell = document.getElementById(`quantityCell${rowIndex}`);
+                let quantity = parseInt(quantityCell.textContent);
+                if (quantity > 0) {
+                    quantityCell.textContent = quantity - 1;
+                    saveQuantity(quantityCell);
+                    checkQuantityWarning(quantityCell);
+                }
+            }
+        
+            function saveQuantity(cell) {
+                
+                console.log(`Quantity updated: ${cell.textContent}`);
+            }
+        
+            function checkQuantityWarning(cell) {
+                let quantity = parseInt(cell.textContent);
+                if (quantity < 3 && quantity >=1) {
+                    cell.parentElement.classList.add('bg-red-300');
+                } else {
+                    cell.parentElement.classList.remove('bg-red-300');
+                }
+                if ( quantity<1) {
+                    cell.parentElement.classList.add('bg-red-500');
+                } else {
+                    cell.parentElement.classList.remove('bg-red-500');
+                }
+            }
+            function searchPatient() {
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("searchInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("patientsTableBody");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[0];
+              if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                  } else {
+                      tr[i].style.display = "none";
+                  }
+              }
+          }
+      }
+        </script>
+        
+   
+  </body>
 </html>
