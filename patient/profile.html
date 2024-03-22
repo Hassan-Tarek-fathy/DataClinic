@@ -1,24 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>نظام صحي</title>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحة الطبيب</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="text-2xl text-center text-white p-4 bg-gray-800">
+        <h1>نظام إدارة العيادة</h1>
+    </div>
+    <div class="flex-grow px-4 py-4">
+        <header class="bg-white border-b border-gray-200 bg-green-500">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <h2 class="text-xl font-semibold">الملف الشخصي للمريض</h2>
+                    <a href="#" class="text-black">تسجيل الخروج</a>
+                </div>
+            </div>
+        </header>
+    </div>
+    
+        <div class="text-2xl p-8 " >
+            <p class="p-4">الاسم: <span id="displayFullName"></span></p>
+            <p class="p-4">الرقم القومي: <span id="displayNationalId"></span></p>
+            <p class="p-4">الجنس: <span id="displayGender"></span></p>
+            <p class="p-4">السن: <span id="displayAge"></span></p>
+            <p class="p-4">العنوان: <span id="displayAddress"></span></p>
+            <p class="p-4">العيادة: <span id="displayClinic"></span></p>
+        <p class="p-4 border-2 border-black  bg-gray-200 text-center " >الرمز الشخصي:    <span class="pr-4" id="displayProfileCode"></span></p>
 
-    <link href="../style.css" rel="stylesheet" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Cairo:wght@200..1000&family=Rampart+One&family=Work+Sans:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,900;1,300;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <h1 class="text-[50px]">السجل</h1>
-  </body>
+        </div>
+
+    </div>
+
+    <script>
+  
+        function generateRandomCode() {
+          return Math.floor(Math.random() * 90000) + 10000; 
+        }
+        localStorage.setItem('profileCode', generateRandomCode());
+
+        document.getElementById('displayFullName').textContent = localStorage.getItem('fullName');
+        document.getElementById('displayNationalId').textContent = localStorage.getItem('nationalId');
+        document.getElementById('displayGender').textContent = localStorage.getItem('gender');
+        document.getElementById('displayAge').textContent = localStorage.getItem('age');
+        document.getElementById('displayAddress').textContent = localStorage.getItem('address');
+        document.getElementById('displayClinic').textContent = localStorage.getItem('clinic');
+        document.getElementById('displayProfileCode').textContent = localStorage.getItem('profileCode');
+    </script>
+</body>
 </html>
