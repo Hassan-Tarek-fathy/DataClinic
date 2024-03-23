@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الاداري</title>
+    <link href="../style.css" rel="stylesheet" />
+    <link
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet"
+    />
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<div class="text-2xl text-center text-white p-4 bg-gray-800">
+    <h1> نظام ادارة العيادة</h1>
+</div>
+<div class="flex min-h-screen">
+    <div class="md:w-64 w-full bg-gray-800 text-white hidden md:block">
+        <div class="flex py-4 px-6">
+            <span class="text-xl font-bold">لوحة التحكم</span>
+        </div>
+        <ul class="mt-6">
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="dashboard.html">الرئيسية</a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="data.html">بيانات جميع المرضى</a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="Reservations.html">حجز</a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="Clinics.html">العيادات</a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="employee.html">الموظفين</a>
+            </li>
+            <li class="py-2 px-4 rounded-md hover:bg-gray-700">
+                <a href="resources.html">الموارد</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <div class="p-8 flex">
+            <h1 class="text-2xl font-bold">مستشفى الشفاء</h1>
+            <div class="mb-4 m-8">
+                <h2 class="text-xl font-semibold mb-2">معلومات الاتصال:</h2>
+                <p class="m-4">العنوان: شارع المثال، المدينة، البلد</p>
+                <p class="m-4">رقم الهاتف: 123456789</p>
+                <p class="m-4">البريد الإلكتروني: info@example.com</p>
+            </div>
+            <div class="mb-4 m-8">
+                <h2 class="text-xl font-semibold mb-2">ساعات العمل:</h2>
+                <p class="m-4">الأحد - الخميس: 9 صباحًا - 5 مساءً</p>
+                <p class="m-4">الجمعة - السبت: مغلق</p>
+            </div>
+            <div class="mb-4 m-8">
+                <h2 class="text-xl font-semibold mb-2">معلومات الطوارئ:</h2>
+                <p class="m-4">في حالات الطوارئ، يرجى الاتصال برقم الطوارئ 123</p>
+            </div>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded h-10 w-20">تعديل</button>
+        </div>
+        <div class="">
+            <h2 class="text-2xl font-bold mt-8">العيادات</h2>
+            <ul class="mt-4">
+                <li class="py-2 px-4 rounded-md hover:bg-gray-700 w-72">
+                    <div class="  items-center">
+                        <a href="" class="text-lg">اطفال</a>
+                        <div class="m-2">
+                            <p>مواعيد العمل: الأحد - الخميس، 9 صباحًا - 5 مساءً</p>
+                            <p>عدد الحجوزات اليومية: 20</p>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded">تعديل</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="py-2 px-4 rounded-md hover:bg-gray-700 w-72">
+                    <div class=" items-center">
+                        <a href="" class="text-lg">صدر</a>
+                        <div class="m-2">
+                            <p>مواعيد العمل: الأحد - الخميس، 8 صباحًا - 4 مساءً</p>
+                            <p>عدد الحجوزات اليومية : 15</p>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded">تعديل</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="py-2 px-4 rounded-md hover:bg-gray-700 w-72">
+                    <div class=" items-center">
+                        <a href="" class="text-lg">رمد</a>
+                        <div class="m-2">
+                            <p>مواعيد العمل: السبت - الأربعاء، 10 صباحًا - 6 مساءً</p>
+                            <p>عدد الحجوزات اليومية: 10</p>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded">تعديل</button>
+                        </div>
+                    </div>
+                </li>
+                <!-- يمكنك إضافة المزيد من العيادات حسب الحاجة -->
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>
