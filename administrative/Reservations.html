@@ -40,3 +40,24 @@
           </li>
         </ul>
       </div>
+      <div class="w-full md:w-3/4 col-span-6">
+        <div class="container mx-auto mt-10 pr-24">
+            <h1 class="text-2xl font-bold mb-4 flex">استمارة التسجيل
+                
+            </h1>
+            <form id="myForm">
+                <label class="block mb-2">الكود:</label>
+                <input type="text" name="code" id="code" class="border rounded-lg px-4 py-2 mb-4">
+    
+                <label class="block mb-2">اختر العيادة:</label>
+                <select name="clinic" id="clinic" class="border rounded-lg px-4 py-2 mb-4">
+                    <option value="clinic1">عيادة 1</option>
+                    <option value="clinic2">عيادة 2</option>
+                    <option value="clinic3">عيادة 3</option>
+                </select>
+    
+                <button type="button" onclick="submitForm()" id="submitButton" class="bg-black hover:bg-yellow-300 hover:text-black text-white font-bold py-2 px-4 rounded " disabled>حجز</button>
+            </form>
+        </div>
+    </div>
+    

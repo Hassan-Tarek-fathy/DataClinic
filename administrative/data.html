@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>الاداري</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link href="../style.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -40,3 +42,103 @@
           </li>
         </ul>
       </div>
+      <div class="w-full col-span-6">
+        <div class="container mx-auto mt-10">
+            <div class="flex justify-start items-center mb-4">
+                <div class="flex">
+                    <input type="text" id="searchInput" onkeyup="filterData()" placeholder="ابحث عن المريض..." class="border rounded-lg px-4 py-2 mr-2">
+                    <button class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg">
+                        <i class='bx bx-search'></i>
+                    </button>
+                </div>
+                
+            </div>
+            
+            <h1 class="text-2xl font-bold mb-4 pl-4 pb-5">بيانات جميع المرضى</h1>
+            <div class="overflow-x-auto">
+                <table class="table-auto border-collapse border border-black w-full pl-4">
+                    <thead>
+                        <tr>
+                            <th class="border border-black px-4 py-2">#</th>
+                            <th class="border border-black px-4 py-2">الاسم</th>
+                            <th class="border border-black px-4 py-2">كود المريض</th>
+                            <th class="border border-black px-4 py-2">العيادة </th>
+                            <th class="border border-black px-4 py-2">رقم الهاتف</th>
+                            <th class="border border-black px-4 py-2">تاريخ التسجيل</th>
+                            <th class="border border-black px-4 py-2">تعديل</th>
+                            <th class="border border-black px-4 py-2">حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataList">
+                        <!-- بيانات المرضى -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex justify-center mt-4">
+            <a href="form.html" class="bg-black hover:bg-yellow-300 hover:text-black text-white font-bold py-2 px-4 rounded ">حجز جديد</a>
+        </div>
+    </div>
+</div>
+
+<div id="editModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center hidden p">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">تعديل</h2>
+        <input type="text" id="editName" class="border rounded-lg px-4 py-2 mb-4" placeholder="Name">
+        <input type="text" id="editNationalId" class="border rounded-lg px-4 py-2 mb-4" placeholder="National ID">
+        <input type="text" id="editPhoneNumber" class="border rounded-lg px-4 py-2 mb-4" placeholder="Phone Number">
+        <button onclick="saveEdit()" id="editSaveButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">حفظ</button>
+        <button onclick="closeEditModal()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">الغاء</button>
+    </div>
+</div>
+<script>
+  var dataList = JSON.parse(localStorage.getItem("dataList")) || [];
+  var dataListContainer = document.getElementById("dataList");
+
+
+
+  displayData(dataList); // Initial display of all data
+
+  function filterData() {
+      var searchInput = document.getElementById("searchInput").value.toLowerCase();
+      var filteredDataList = dataList.filter(function(data) {
+          return data.name.toLowerCase().includes(searchInput);
+      });
+      displayData(filteredDataList);
+  }
+
+  function deleteData(index) {
+      dataList.splice(index, 1);
+      localStorage.setItem("dataList", JSON.stringify(dataList));
+      window.location.reload();
+  }
+
+  function editData(index) {
+      var data = dataList[index];
+      document.getElementById("editName").value = data.name;
+      document.getElementById("editNationalId").value = data.national_id;
+      document.getElementById("editPhoneNumber").value = data.phone_number;
+      document.getElementById("editSaveButton").setAttribute("data-index", index);
+      document.getElementById("editModal").classList.remove("hidden");
+  }
+
+  function saveEdit() {
+      var index = document.getElementById("editSaveButton").getAttribute("data-index");
+      var data = {
+          name: document.getElementById("editName").value,
+          national_id: document.getElementById("editNationalId").value,
+          phone_number: document.getElementById("editPhoneNumber").value,
+          registration_date: new Date().toLocaleString()
+      };
+      dataList[index] = data;
+      localStorage.setItem("dataList", JSON.stringify(dataList));
+      closeEditModal();
+      window.location.reload();
+  }
+
+  function closeEditModal() {
+      document.getElementById("editModal").classList.add("hidden");
+  }
+</script>
+</body>
+</html>
