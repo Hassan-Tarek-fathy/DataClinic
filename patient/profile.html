@@ -25,29 +25,35 @@
             <p class="p-4">الاسم: <span id="displayFullName"></span></p>
             <p class="p-4">الرقم القومي: <span id="displayNationalId"></span></p>
             <p class="p-4">الجنس: <span id="displayGender"></span></p>
-            <p class="p-4">السن: <span id="displayAge"></span></p>
+            <p class="p-4">العمر: <span id="displayAge"></span></p>
             <p class="p-4">العنوان: <span id="displayAddress"></span></p>
             <p class="p-4">العيادة: <span id="displayClinic"></span></p>
-        <p class="p-4 border-2 border-black  bg-gray-200 text-center " >الرمز الشخصي:    <span class="pr-4" id="displayProfileCode"></span></p>
+            <p class="p-4 border-2 border-black  bg-gray-200 text-center " >الرمز الشخصي:    <span class="pr-4" id="displayProfileCode"></span></p>
 
         </div>
 
     </div>
+  
+    <div id="profileData"></div>
 
     <script>
-  
-        function generateRandomCode() {
-          return Math.floor(Math.random() * 90000) + 10000; 
-        }
-        localStorage.setItem('profileCode', generateRandomCode());
-
-        document.getElementById('displayFullName').textContent = localStorage.getItem('fullName');
-        document.getElementById('displayNationalId').textContent = localStorage.getItem('nationalId');
-        document.getElementById('displayGender').textContent = localStorage.getItem('gender');
-        document.getElementById('displayAge').textContent = localStorage.getItem('age');
-        document.getElementById('displayAddress').textContent = localStorage.getItem('address');
-        document.getElementById('displayClinic').textContent = localStorage.getItem('clinic');
-        document.getElementById('displayProfileCode').textContent = localStorage.getItem('profileCode');
+        var nationalId = window.location.search.substring(1);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                document.getElementById("profileData").innerHTML = `
+                    <p>الاسم: ${data.fullName}</p>
+                    <p>الرقم القومي: ${data.nationalId}</p>
+                    <p>الجنس: ${data.gender}</p>
+                    <p>العمر: ${data.age}</p>
+                    <p>العنوان: ${data.address}</p>
+                    <p>العيادة: ${data.clinic}</p>
+                `;
+            }
+        };
+        xhr.open("GET", "data.php?nationalId=" + nationalId, true);
+        xhr.send();
     </script>
 </body>
 </html>

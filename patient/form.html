@@ -17,7 +17,7 @@
     <h1>نظام إدارة العيادة</h1>
 </div>
 <h1 class="text-[30px] font-bold max-w-sm mx-auto my-10">التذكرة</h1>
-<form class="max-w-sm mx-auto" id="registrationForm">
+<form class="max-w-sm mx-auto" id="registrationForm" method="post" action="index.php">
   <label for="fullName" class="block mb-2 text-sm font-medium text-gray-900">الأسم كامل</label>
   <input
     type="text"
@@ -72,28 +72,12 @@
   </select>
   <button
     type="submit"
-    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mb-10"
+     href="" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mb-10"
   >
     التسجيل
   </button>
 </form>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('registrationForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          localStorage.setItem('fullName', document.getElementById('fullName').value);
-          localStorage.setItem('nationalId', document.getElementById('nationalId').value);
-          localStorage.setItem('gender', document.getElementById('gender').value);
-          localStorage.setItem('age', document.getElementById('age').value);
-          localStorage.setItem('address', document.getElementById('address').value);
-          localStorage.setItem('clinic', document.getElementById('clinic').value);
-          
-          // Redirect to profile page
-          window.location.href = 'profile.html';
-      });
-  });
 
-  
 
 </script>
 </body>
